@@ -1,3 +1,5 @@
+# tools.py
+
 def time_to_minutes(time: str) -> int:
     """Convert a time string ('%H:%M') to minutes since midnight."""
     time_parts = time.split(":")

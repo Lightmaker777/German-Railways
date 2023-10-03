@@ -23,7 +23,8 @@ class HamburgRailExchangeScheduler:
     def notify_city(self, city, message):
         """Send message about change to another city. WARNING: This method makes an external API call!"""
         print(f"WARNING! Sending message to exchange in {city}.")
-        urllib.request.Request(f"{EXTERNAL_URL}{city}/", data=json.dumps(message))
+        urllib.request.Request(
+            f"{EXTERNAL_URL}{city}/", data=json.dumps(message))
 
     def schedule_train_to_hamburg(self, city: str, desired_time: str):
         """
@@ -50,7 +51,8 @@ class HamburgRailExchangeScheduler:
         departure_time = minutes_to_time(scheduled_minutes)
         self.notify_city(city, {"new_train_to_hamburg": departure_time})
         self.city_data[city]["trains_to_hamburg"].append(departure_time)
-        arrival_minutes = scheduled_minutes + self.city_data[city]["minutes_to_hamburg"]
+        arrival_minutes = scheduled_minutes + \
+            self.city_data[city]["minutes_to_hamburg"]
         if arrival_minutes > 1440:
             arrival_minutes -= 1440
         arrival_time = minutes_to_time(arrival_minutes)
@@ -75,7 +77,8 @@ class HamburgRailExchangeScheduler:
                     continue
             time_found = True
         departure_time = minutes_to_time(scheduled_minutes)
-        arrival_minutes = scheduled_minutes + self.city_data[city]["minutes_to_hamburg"]
+        arrival_minutes = scheduled_minutes + \
+            self.city_data[city]["minutes_to_hamburg"]
         if arrival_minutes > 1440:
             arrival_minutes -= 1440
         arrival_time = minutes_to_time(arrival_minutes)
